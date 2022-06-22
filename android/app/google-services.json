@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "682889802273",
+    "project_id": "finalyearproject-aeafb",
+    "storage_bucket": "finalyearproject-aeafb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682889802273:android:d663a4fcfb8136b6dbe960",
+        "android_client_info": {
+          "package_name": "com.example.kyuproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682889802273-3v9khjm2jctjjqpqvg7u56h5qop6iqsm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtrDrfp0aNiMscQZuO0b3rPKX2yjUqf58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682889802273-3v9khjm2jctjjqpqvg7u56h5qop6iqsm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
