@@ -1,4 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:kyuproject/utilities/dialogs/generic_dialog.dart';
 
 Future<void> showCannotShareEmptyNoteDialog(BuildContext context) {
-  return sho
+  return showGenericDialog(
+    context: context,
+    title: 'Sharing',
+    content: 'You cannot share an empty note',
+    optionBuilder: () => {
+      'OK': null,
+    },
+  );
+}
