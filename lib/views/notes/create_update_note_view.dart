@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kyuproject/services/auth/auth_service.dart';
 import 'package:kyuproject/utilities/dialogs/cannot_share_empty_note_dialog.dart';
 import 'package:kyuproject/utilities/generics/get_arguments.dart';
@@ -20,11 +21,26 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
   CloudNote? _note;
   late final FirebaseCloudStorage _notesService;
   late final TextEditingController _textController;
+  late final TextEditingController _regnoController;
+  late final TextEditingController _courseController;
+  late final TextEditingController _residentialController;
+  late final TextEditingController _stdContactController;
+  late final TextEditingController _studentNoController;
+  late final TextEditingController _yearOfStudyController;
+  // // number controllers
+  // late int? _stdContactController;
+  // late  int? _studentNoController;
+  // late int? _yearOfStudyController;
 
   @override
   void initState() {
     _notesService = FirebaseCloudStorage();
     _textController = TextEditingController();
+    _regnoController = TextEditingController();
+    _stdContactController = TextEditingController();
+    _yearOfStudyController = TextEditingController();
+    _studentNoController = TextEditingController();
+
     super.initState();
   }
 
@@ -43,6 +59,25 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
   void _setupTextControllerListener() {
     _textController.removeListener(_textControllerListener);
     _textController.addListener(_textControllerListener);
+    // mine
+
+    _regnoController.removeListener(_textControllerListener);
+    _regnoController.addListener(_textControllerListener);
+
+    _courseController.removeListener(_textControllerListener);
+    _courseController.addListener(_textControllerListener);
+
+    _residentialController.removeListener(_textControllerListener);
+    _residentialController.addListener(_textControllerListener);
+
+    _stdContactController.removeListener(_textControllerListener);
+    _stdContactController.addListener(_textControllerListener);
+
+    _studentNoController.removeListener(_textControllerListener);
+    _studentNoController.addListener(_textControllerListener);
+
+    _yearOfStudyController.removeListener(_textControllerListener);
+    _yearOfStudyController.addListener(_textControllerListener);
   }
 
   Future<CloudNote> createOrGetExistingNote(BuildContext context) async {
@@ -111,7 +146,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
             )
           ],
         ),
-         resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
         body: FutureBuilder(
           future: createOrGetExistingNote(context),
           builder: (context, snapshot) {
@@ -120,206 +155,214 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
                 _setupTextControllerListener();
                 return Scaffold(
                   body: SafeArea(
-                  child: Form(
-                    
-                    key: _formKey,
-                    child: Scrollbar(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListView(
-                          shrinkWrap: true,
-                          // padding: EdgeInsets.all(8.0),
-                          children: [
-                            SizedBox(height: 16.0),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "Name",
-                              ),
-                            ),
-                            SizedBox(height: 12),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: _textController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "Name is required";
-                                  }
-                  
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                    label: Text("Student Name"),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(8))),
-                              ),
-                            ),
-                            // field two
-                  
+                    child: Form(
+                      key: _formKey,
+                      child: Scrollbar(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListView(
+                            shrinkWrap: true,
+                            // padding: EdgeInsets.all(8.0),
+                            children: [
                               SizedBox(height: 16.0),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "REG No",
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Name",
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 12),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: _textController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                return "Reg number required";
-                                  }
-                  
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                label: Text("REG NO"),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8))),
+                              SizedBox(height: 12),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _textController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Name is required";
+                                    }
+
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                      label: Text("Student Name"),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8))),
+                                ),
                               ),
-                            ),
-                            
-                            // std number
+                              // field two
+
                               SizedBox(height: 16.0),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "Student no",
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "REG No",
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 12),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: _textController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                return "Student no required";
-                                  }
-                  
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                label: Text("Student No"),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8))),
+                              SizedBox(height: 12),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _regnoController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Reg number required";
+                                    }
+
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                      label: Text("REG NO"),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8))),
+                                ),
                               ),
-                            ),
-                            // // field 3
+
+                              // std number
                               SizedBox(height: 16.0),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "Course",
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Student no",
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 12),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: _textController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "Course name required";
-                                  }
-                  
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                    label: Text("course Name"),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(8))),
+                              SizedBox(height: 12),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _studentNoController,
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Student no required";
+                                    }
+
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                      label: Text("Student No"),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8))),
+                                ),
                               ),
-                            ),
-                            // field year of study
+                              // // field 3
                               SizedBox(height: 16.0),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "Year of study",
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Course",
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 12),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: _textController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "study year required";
-                                  }
-                  
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                    label: Text("Student year"),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(8))),
+                              SizedBox(height: 12),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _courseController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Course name required";
+                                    }
+
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                      label: Text("course Name"),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8))),
+                                ),
                               ),
-                            ),
-                            // field residential status
+                              // field year of study
                               SizedBox(height: 16.0),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "Residential Status",
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Year of study",
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 12),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: _textController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "student residential status required";
-                                  }
-                  
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                    label: Text("Student residentail status"),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(8))),
+                              SizedBox(height: 12),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _yearOfStudyController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "study year required";
+                                    }
+
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                      label: Text("Student year"),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8))),
+                                ),
                               ),
-                            ),
-                            // contact feild
+                              // field residential status
                               SizedBox(height: 16.0),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "Student contact",
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Residential Status",
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 12),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: _textController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "Student contact";
-                                  }
-                  
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                    label: Text("Student contact"),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(8))),
+                              SizedBox(height: 12),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _residentialController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "student residential status required";
+                                    }
+
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                      label: Text("Student residentail status"),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8))),
+                                ),
                               ),
-                            ),
-                  
-                  
-                          ],
+                              // contact feild
+                              SizedBox(height: 16.0),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Student contact",
+                                ),
+                              ),
+                              SizedBox(height: 12),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _stdContactController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Student contact";
+                                    }
+
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                      label: Text("Student contact"),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8))),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
                   ),
                 );
 
