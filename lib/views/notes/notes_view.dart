@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:kyuproject/constants/routes.dart';
 import 'package:kyuproject/enums/menu_action.dart';
@@ -83,10 +85,16 @@ class _NotesViewState extends State<NotesView> {
                     },
                   );
                 } else {
-                  return const CircularProgressIndicator();
+                  return Center(child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const CircularProgressIndicator(),
+                  ));
                 }
               default:
-                return const CircularProgressIndicator();
+                return Center(child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: const CircularProgressIndicator(),
+                ));
             }
           },
         ));
