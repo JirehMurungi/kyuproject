@@ -17,7 +17,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MaterialApp(
-      title: 'Flutter Demo',
+      title: 'A Notebook on the go',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

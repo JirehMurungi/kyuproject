@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyuproject/constants/routes.dart';
@@ -56,8 +58,23 @@ class _LoginViewState extends State<LoginView> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
+              SizedBox(height: 16,),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 280,
+                  width: 280,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("assets/icon/icon.png"),
+                          fit: BoxFit.fill)),
+                ),
+              ),
               const Text(
-                  'Please log in to your account in order to interact with and add student details!'),
+                'Please log in to your account in order to interact with and add student details!',
+                textAlign: TextAlign.center,
+               
+              ),
               TextField(
                 controller: _email,
                 enableSuggestions: false,
@@ -76,18 +93,24 @@ class _LoginViewState extends State<LoginView> {
                   hintText: 'Enter your password here',
                 ),
               ),
-              TextButton(
-                onPressed: () async {
-                  final email = _email.text;
-                  final password = _password.text;
-                  context.read<AuthBloc>().add(
-                        AuthEventLogIn(
-                          email,
-                          password,
-                        ),
-                      );
-                },
-                child: const Text('Login'),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextButton(
+                  onPressed: () async {
+                    final email = _email.text;
+                    final password = _password.text;
+                    context.read<AuthBloc>().add(
+                          AuthEventLogIn(
+                            email,
+                            password,
+                          ),
+                        );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Text('Login'),
+                  ),
+                ),
               ),
               TextButton(
                   onPressed: () {
@@ -95,14 +118,20 @@ class _LoginViewState extends State<LoginView> {
                           const AuthEventForgotPassword(),
                         );
                   },
-                  child: const Text('I forgot my password')),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Text('I forgot my password'),
+                  )),
               TextButton(
                   onPressed: () {
                     context.read<AuthBloc>().add(
                           const AuthEventShouldRegister(),
                         );
                   },
-                  child: const Text('Not registered yet? Register here!'))
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Text('Not registered yet? Register here!'),
+                  ))
             ],
           ),
         ),
