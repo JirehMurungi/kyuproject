@@ -1,0 +1,46 @@
+{
+  "name": "Cephas Brian",
+  "regNo": "19/i/7834",
+  "studentNo": 2000944,
+  "academicYear": "Year 1",
+  "semester": "Sem 2",
+  "sex": "Male",
+  "maritalStatus": "Single",
+  "dateOfBirth": "20-12-1990",
+  "nationality": "Ugandan",
+  "emailAddress": "jirehmurungi@gmail.com",
+  "phoneNumber": "0775533685",
+  "homeDistrict": "Kabarole",
+  "religiousAffiliation": "BornAgain",
+  "firstParentName": "Mr KattaPatrick",
+  "firstParentContact": "0775533685",
+  "secondParentName": "MrsKattaGrace",
+  "secondParentContact": "0774149104",
+  "disabled": false,
+  "course": {
+    "name": "Computer Science",
+    "yearOfEntry": 2020,
+    "faculty": "Faculty of Science",
+    "typeOfEntry": "Alevel",
+    "expectedAward": "Diploma"
+  },
+  "schoolsAttended": [
+    {
+      "schoolName": "KYU",
+      "from": 2018,
+      "to": 2020
+    },
+    {
+      "schoolName": "KYU",
+      "from": 2018,
+      "to": 2020
+    },
+    {
+      "schoolName": "KYU",
+      "from": 2018,
+      "to": 2020
+    }
+  ],
+  "hallOfAttachment": "Nanziri",
+  "residentialStatus": "Non-Resident"
+}

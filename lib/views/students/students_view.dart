@@ -12,14 +12,14 @@ import 'package:kyuproject/utilities/dialogs/logout_dialog.dart';
 import 'package:kyuproject/views/notes_list_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show ReadContext;
 
-class NotesView extends StatefulWidget {
-  const NotesView({Key? key}) : super(key: key);
+class StudentsView extends StatefulWidget {
+  const StudentsView({Key? key}) : super(key: key);
 
   @override
-  _NotesViewState createState() => _NotesViewState();
+  _StudentsViewState createState() => _StudentsViewState();
 }
 
-class _NotesViewState extends State<NotesView> {
+class _StudentsViewState extends State<StudentsView> {
   late final FirebaseCloudStorage _notesService;
   String get userId => AuthService.firebase().currentUser!.id;
 
@@ -85,13 +85,15 @@ class _NotesViewState extends State<NotesView> {
                     },
                   );
                 } else {
-                  return Center(child: Padding(
+                  return Center(
+                      child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: const CircularProgressIndicator(),
                   ));
                 }
               default:
-                return Center(child: Padding(
+                return Center(
+                    child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: const CircularProgressIndicator(),
                 ));

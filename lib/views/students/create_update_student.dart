@@ -3,24 +3,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kyuproject/services/auth/auth_service.dart';
+import 'package:kyuproject/services/cloud/student_cloud.dart';
 import 'package:kyuproject/utilities/dialogs/cannot_share_empty_note_dialog.dart';
 import 'package:kyuproject/utilities/generics/get_arguments.dart';
 import 'package:kyuproject/services/cloud/cloud_note.dart';
-import 'package:kyuproject/services/cloud/cloud_storage_exceptions.dart';
 import 'package:kyuproject/services/cloud/firebase_cloud_storage.dart';
 import 'package:share_plus/share_plus.dart';
 
-class CreateUpdateNoteView extends StatefulWidget {
-  const CreateUpdateNoteView({Key? key}) : super(key: key);
+import '../../models/student.dart';
+
+// cloud StudentCloud
+StudentCloud _studentCloud = StudentCloud();
+
+class CreateUpdateStudent extends StatefulWidget {
+  const CreateUpdateStudent({Key? key}) : super(key: key);
 
   @override
-  State<CreateUpdateNoteView> createState() => _CreateUpdateNoteViewState();
+  State<CreateUpdateStudent> createState() => _CreateUpdateStudentState();
 }
 
-class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
+class _CreateUpdateStudentState extends State<CreateUpdateStudent> {
   CloudNote? _note;
   late final FirebaseCloudStorage _notesService;
-  late final TextEditingController _textController;
+  late final TextEditingController _nameController;
   late final TextEditingController _regnoController;
   late final TextEditingController _courseController;
   late final TextEditingController _residentialController;
@@ -35,7 +40,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
   @override
   void initState() {
     _notesService = FirebaseCloudStorage();
-    _textController = TextEditingController();
+    _nameController = TextEditingController();
     _regnoController = TextEditingController();
     _stdContactController = TextEditingController();
     _yearOfStudyController = TextEditingController();
@@ -51,7 +56,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
     if (note == null) {
       return;
     }
-    final text = _textController.text;
+    final text = _nameController.text;
     await _notesService.updateNote(
       documentId: note.documentId,
       text: text,
@@ -59,8 +64,8 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
   }
 
   void _setupTextControllerListener() {
-    _textController.removeListener(_textControllerListener);
-    _textController.addListener(_textControllerListener);
+    _nameController.removeListener(_textControllerListener);
+    _nameController.addListener(_textControllerListener);
     // mine
 
     _regnoController.removeListener(_textControllerListener);
@@ -87,7 +92,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
 
     if (widgetNote != null) {
       _note = widgetNote;
-      _textController.text = widgetNote.text;
+      _nameController.text = widgetNote.text;
       return widgetNote;
     }
 
@@ -104,14 +109,14 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
 
   void _deleteNoteIfTextIsEmpty() {
     final note = _note;
-    if (_textController.text.isEmpty && note != null) {
+    if (_nameController.text.isEmpty && note != null) {
       _notesService.deleteNote(documentId: note.documentId);
     }
   }
 
   void _saveNoteIfTextNotEmpty() async {
     final note = _note;
-    final text = _textController.text;
+    final text = _nameController.text;
     if (note != null && text.isNotEmpty) {
       await _notesService.updateNote(
         documentId: note.documentId,
@@ -124,7 +129,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
   void dispose() {
     _deleteNoteIfTextIsEmpty();
     _saveNoteIfTextNotEmpty();
-    _textController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 
@@ -137,7 +142,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
           actions: [
             IconButton(
               onPressed: () async {
-                final text = _textController.text;
+                final text = _nameController.text;
                 if (_note == null || text.isEmpty) {
                   await showCannotShareEmptyNoteDialog(context);
                 } else {
@@ -169,15 +174,13 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
                               SizedBox(height: 16.0),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  "Name",
-                                ),
+                                child: Text("Name"),
                               ),
                               SizedBox(height: 12),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: TextFormField(
-                                  controller: _textController,
+                                  controller: _nameController,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return "Name is required";
@@ -186,10 +189,11 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
                                     return null;
                                   },
                                   decoration: InputDecoration(
-                                      label: Text("Student Name"),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8))),
+                                    label: Text("Student Name"),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
                                 ),
                               ),
                               // field two
@@ -358,6 +362,29 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(8))),
+                                ),
+                              ),
+
+                              // submit button
+                              SizedBox(height: 16.0),
+
+                              // submit button
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextButton(
+                                  onPressed: () {
+                                    // validate form
+                                    if (_formKey.currentState!.validate()) {
+                                      // if valid, save data to cloud
+                                      _studentCloud.addNewStudent(
+                                        student: Student.sampleStudent,
+                                      );
+                                      // if form is valid
+                                      // submit to database
+                                      // _submit();
+                                    }
+                                  },
+                                  child: Text("Submit"),
                                 ),
                               ),
                             ],

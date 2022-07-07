@@ -8,10 +8,11 @@ import 'package:kyuproject/services/auth/bloc/auth_state.dart';
 import 'package:kyuproject/services/auth/firebase_auth_provider.dart';
 import 'package:kyuproject/views/forgot_password_view.dart';
 import 'package:kyuproject/views/login_view.dart';
-import 'package:kyuproject/views/notes/create_update_note_view.dart';
-import 'package:kyuproject/views/notes/notes_view.dart';
 import 'package:kyuproject/views/register_view.dart';
 import 'package:kyuproject/views/verify_email_view.dart';
+
+import 'views/students/create_update_student.dart';
+import 'views/students/students_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +27,7 @@ void main() {
         child: const HomePage(),
       ),
       routes: {
-        createOrUpdateNoteRoute: (context) => const CreateUpdateNoteView(),
+        createOrUpdateNoteRoute: (context) => const CreateUpdateStudent(),
       },
     ),
   );
@@ -51,7 +52,7 @@ class HomePage extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is AuthStateLoggedIn) {
-          return const NotesView();
+          return const StudentsView();
         } else if (state is AuthStateNeedsVerification) {
           return const VerifyEmailView();
         } else if (state is AuthStateLoggedOut) {
