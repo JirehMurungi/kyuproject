@@ -40,6 +40,8 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
     _stdContactController = TextEditingController();
     _yearOfStudyController = TextEditingController();
     _studentNoController = TextEditingController();
+    _courseController = TextEditingController();
+    _residentialController = TextEditingController();
 
     super.initState();
   }

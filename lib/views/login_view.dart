@@ -53,14 +53,12 @@ class _LoginViewState extends State<LoginView> {
       child: Scaffold(
         appBar: AppBar(
           title: Center(
-              child: const Text(
-            'Login', style: TextStyle(fontSize:28)
-          )),
+              child: const Text('Login', style: TextStyle(fontSize: 28))),
           leading: Icon(Icons.login),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
+          child: ListView(
             children: [
               SizedBox(
                 height: 16,
@@ -68,8 +66,8 @@ class _LoginViewState extends State<LoginView> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  height: 280,
-                  width: 280,
+                  height: 250,
+                  width: 250,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("assets/icon/icon.png"),
@@ -77,7 +75,8 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
               const Text(
-                'Please log in to your account in order to interact with and add student details!', style: TextStyle(fontSize:20),
+                'Please log in to your account in order to interact with and add student details!',
+                style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),
               TextField(
@@ -113,7 +112,10 @@ class _LoginViewState extends State<LoginView> {
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: const Text('Login',style: TextStyle(fontSize:16),),
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(fontSize: 16),
+                    ),
                   ),
                 ),
               ),
@@ -125,7 +127,10 @@ class _LoginViewState extends State<LoginView> {
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: const Text('I forgot my password',style: TextStyle(fontSize:16),),
+                    child: const Text(
+                      'I forgot my password',
+                      style: TextStyle(fontSize: 16),
+                    ),
                   )),
               TextButton(
                   onPressed: () {
@@ -135,7 +140,10 @@ class _LoginViewState extends State<LoginView> {
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: const Text('Not registered yet? Register here!',style: TextStyle(fontSize:16),),
+                    child: const Text(
+                      'Not registered yet? Register here!',
+                      style: TextStyle(fontSize: 16),
+                    ),
                   ))
             ],
           ),
