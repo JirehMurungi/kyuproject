@@ -16,7 +16,7 @@ class StudentsView extends StatefulWidget {
   const StudentsView({Key? key}) : super(key: key);
 
   @override
-  _StudentsViewState createState() => _StudentsViewState();
+  State<StudentsView> createState() => _StudentsViewState();
 }
 
 class _StudentsViewState extends State<StudentsView> {
@@ -46,6 +46,7 @@ class _StudentsViewState extends State<StudentsView> {
                   case MenuAction.logout:
                     final shouldLogout = await showLogOutDialog(context);
                     if (shouldLogout) {
+                      // ignore: use_build_context_synchronously
                       context.read<AuthBloc>().add(
                             const AuthEventLogOut(),
                           );

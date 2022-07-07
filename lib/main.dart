@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kyuproject/constants/routes.dart';
 import 'package:kyuproject/helpers/loading/loading_screen.dart';
 import 'package:kyuproject/services/auth/bloc/auth_bloc.dart';
@@ -11,24 +12,27 @@ import 'package:kyuproject/views/login_view.dart';
 import 'package:kyuproject/views/register_view.dart';
 import 'package:kyuproject/views/verify_email_view.dart';
 
-import 'views/students/create_update_student.dart';
-import 'views/students/students_view.dart';
+import 'views/forms/capture_form.dart';
+import 'views/forms/students_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    MaterialApp(
-      title: 'A Notebook on the go',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    ProviderScope(
+      child: MaterialApp(
+        title: 'A Notebook on the go',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: BlocProvider<AuthBloc>(
+          create: (context) => AuthBloc(FirebaseAuthProvider()),
+          child: const HomePage(),
+        ),
+        routes: {
+          // createOrUpdateNoteRoute: (context) => const CreateUpdateStudent(),
+          createOrUpdateNoteRoute: (context) => const CaptureForm(),
+        },
       ),
-      home: BlocProvider<AuthBloc>(
-        create: (context) => AuthBloc(FirebaseAuthProvider()),
-        child: const HomePage(),
-      ),
-      routes: {
-        createOrUpdateNoteRoute: (context) => const CreateUpdateStudent(),
-      },
     ),
   );
 }

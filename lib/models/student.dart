@@ -54,7 +54,7 @@ class Student {
   String firstParentContact;
   String secondParentName;
   String secondParentContact;
-  bool disabled;
+  String disabled;
   Course course;
   List<SchoolAttended> schoolsAttended;
   String hallOfAttachment;
@@ -130,7 +130,7 @@ class Student {
     firstParentContact: "0775533685",
     secondParentName: "MrsKattaGrace",
     secondParentContact: "0774149104",
-    disabled: false,
+    disabled: "false",
     course: Course(
         name: "Computer Science",
         yearOfEntry: 2020,
@@ -145,4 +145,10 @@ class Student {
     hallOfAttachment: "Nanziri",
     residentialStatus: "Non-Resident",
   );
+
+  //  to string
+  @override
+  String toString() {
+    return 'Student{name: $name, regNo: $regNo, studentNo: $studentNo, academicYear: $academicYear, semester: $semester';
+  }
 }

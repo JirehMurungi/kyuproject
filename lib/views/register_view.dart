@@ -2,9 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kyuproject/constants/routes.dart';
 import 'package:kyuproject/services/auth/auth_exceptions.dart';
-import 'package:kyuproject/services/auth/auth_service.dart';
 import 'package:kyuproject/services/auth/bloc/auth_bloc.dart';
 import 'package:kyuproject/services/auth/bloc/auth_event.dart';
 import 'package:kyuproject/services/auth/bloc/auth_state.dart';
@@ -61,7 +59,7 @@ class _RegisterViewState extends State<RegisterView> {
             padding: const EdgeInsets.all(8.0),
             child: ListView(
               children: [
-                          Padding(
+                Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     height: 250,
@@ -121,21 +119,21 @@ class _RegisterViewState extends State<RegisterView> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextButton(
-                    onPressed: () {
-                        context.read<AuthBloc>().add(
-                              const AuthEventLogOut(),
-                            );
-                    },
-                    child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: const Text('Already registered? Login here!'),
-                    ),
-                  ),
+                          onPressed: () {
+                            context.read<AuthBloc>().add(
+                                  const AuthEventLogOut(),
+                                );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child:
+                                const Text('Already registered? Login here!'),
+                          ),
+                        ),
                       )
                     ],
                   ),
                 ),
-                
               ],
             ),
           ),
