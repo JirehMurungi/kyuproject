@@ -6,8 +6,8 @@ class SchoolAttended {
   });
 
   String schoolName;
-  int from;
-  int to;
+  String from;
+  String to;
 
   factory SchoolAttended.fromMap(Map<String, dynamic> json) => SchoolAttended(
         schoolName: json["schoolName"],

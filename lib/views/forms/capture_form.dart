@@ -3,8 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../services/cloud/student_cloud.dart';
 import '../../theme/colors.dart';
-import 'form_screen.dart';
+import 'data/form_screen.dart';
 import 'providers.dart';
+import 'form_body.dart';
 
 // cloud StudentCloud
 StudentCloud _studentCloud = StudentCloud();
@@ -25,7 +26,7 @@ class CaptureForm extends ConsumerWidget {
     final isFirstScreen = currentScreenIndex == 0;
 
     // check if we are on the last screen
-    final isLastScreen = currentScreenIndex == (screenList.length - 1);
+    final isLastScreen = currentScreenIndex == (formScreens.length - 1);
 
     // return currentScreen;
     //
@@ -33,12 +34,13 @@ class CaptureForm extends ConsumerWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(currentScreen.screenName),
-        backgroundColor: kyuBlue,
+        backgroundColor: currentScreen.screenColor,
       ),
-      body: currentScreen.screenWidget,
+      // body: currentScreen.screenWidget,
+      body: FormBody(formScreen: currentScreen),
       // bottom nav bar with 2 buttons next and back
       bottomNavigationBar: Container(
-        color: kyuBlue,
+        color:  currentScreen.screenColor,
         height: kToolbarHeight,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

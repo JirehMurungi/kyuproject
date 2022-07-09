@@ -1,30 +1,30 @@
-List<String> academicYear = [
+List<String> academicYearList = [
   'Year one(1)',
   'Year two(2)',
   'Year three(3)',
   'Year four(4)',
 ];
-List<String> sex = [
+List<String> sexList = [
   'Male',
   'Female',
 ];
-List<String> maritalStatus = [
+List<String> maritalStatusList = [
   'Single',
   'Married',
   'Seperated',
   'Widowed',
   'Divorced',
 ];
-List<String> semester = [
+List<String> semesterList = [
   'Semester one(1)',
   'Semster two(2)',
 ];
-List<String> disabilityStatus = [
+List<String> disabledList = [
   'Disabled',
   'Not Disabled',
 ];
 
-List<String> hallOfAttachment = [
+List<String> hallOfAttachmentList = [
   'Kulubya Hall',
   'Nanziri Hall',
   'Pearl Hall',
@@ -32,11 +32,11 @@ List<String> hallOfAttachment = [
   'Mandela Hall',
 ];
 
-List<String> residentialStatus = [
+List<String> residentialStatusList = [
   'Resident',
   'Non-Resident',
 ];
-List<String> homeDistrict = [
+List<String> homeDistrictList = [
   'Buikwe',
   'Bukomansimbi',
   'Butambala',
@@ -172,7 +172,7 @@ List<String> homeDistrict = [
   'Sheema',
 ];
 
-List<String> course = [
+List<String> courseList = [
   'Bachelor of Business Studies with Education',
   'Bachelor of Business Administration',
   'Bachelor of Business Administration',
@@ -325,13 +325,13 @@ List<String> course = [
   'Master in Vocational Pedagogy',
   'Postgraduate Diploma in Vocational Pedagogy',
 ];
-List<String> typeOfEntry = [
+List<String> courseTypeOfEntryList = [
   "O'Level",
   'Certificate',
   "A'Level",
   'Diploma',
 ];
-List<String> faculty = [
+List<String> courseFacultyList = [
   'Faculty of Engineering',
   'Faculty of Science',
   'Faculty of Agriculture',
@@ -346,7 +346,7 @@ List<String> faculty = [
   'School of Vocational Studies (SOVS)',
   'Institute of Distance Education, E-Learning & Learning Centres (IDAEL)',
 ];
-List<String> expectedAward = [
+List<String> courseExpectedAwardList = [
   'Certificate',
   'Diploma',
   'Degree',

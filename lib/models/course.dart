@@ -8,7 +8,7 @@ class Course {
   });
 
   String name;
-  int yearOfEntry;
+  String yearOfEntry;
   String faculty;
   String typeOfEntry;
   String expectedAward;

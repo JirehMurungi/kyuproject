@@ -4,52 +4,56 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/course.dart';
 import '../../models/school_attended.dart';
 import '../../models/student.dart';
-import 'course_form.dart';
-import 'schools_attended_form.dart';
-import 'student_form.dart';
+import 'data/dropdown_lists.dart';
 
 ///Current Index of the auth pages
 final currentScreenIndexProvider = StateProvider<int>((_) => 0);
-
-// provider that provides a list of widget screen
-final screenList = [
-  const StudentForm(),
-  const CourseForm(),
-  const SchoolsAttended(),
-];
 
 // create state providers for the above fields
 final nameProvider = StateProvider<String>((_) => '');
 final regNoProvider = StateProvider<String>((_) => '');
 final studentNoProvider = StateProvider<String>((_) => '');
-final academicYearProvider = StateProvider<String>((_) => '');
-final semesterProvider = StateProvider<String>((_) => '');
-final sexProvider = StateProvider<String>((_) => '');
-final maritalStatusProvider = StateProvider<String>((_) => '');
-final dateOfBirthProvider = StateProvider<String>((_) => '');
+final academicYearProvider =
+    StateProvider<String>((_) => academicYearList.first);
+final semesterProvider = StateProvider<String>((_) => semesterList.first);
+final sexProvider = StateProvider<String>((_) => sexList.first);
+final maritalStatusProvider =
+    StateProvider<String>((_) => maritalStatusList.first);
+final dateOfBirthProvider = StateProvider<DateTime>(
+  (_) => DateTime.now(),
+);
 final nationalityProvider = StateProvider<String>((_) => '');
 final emailAddressProvider = StateProvider<String>((_) => '');
 final phoneNumberProvider = StateProvider<String>((_) => '');
-final homeDistrictProvider = StateProvider<String>((_) => '');
+final homeDistrictProvider = StateProvider<String>((_) {
+  final List<String> alphabetDistricts = homeDistrictList
+    ..sort((a, b) => a.compareTo(b));
+  return alphabetDistricts.first;
+});
 final religiousAffiliationProvider = StateProvider<String>((_) => '');
 final firstParentNameProvider = StateProvider<String>((_) => '');
 final firstParentContactProvider = StateProvider<String>((_) => '');
 final secondParentNameProvider = StateProvider<String>((_) => '');
 final secondParentContactProvider = StateProvider<String>((_) => '');
-final disabledProvider = StateProvider<String>((_) => "");
-final hallOfAttachmentProvider = StateProvider<String>((_) => '');
-final residentialStatusProvider = StateProvider<String>((_) => '');
+final disabledProvider = StateProvider<String>((_) => disabledList.first);
+final hallOfAttachmentProvider =
+    StateProvider<String>((_) => hallOfAttachmentList.first);
+final residentialStatusProvider =
+    StateProvider<String>((_) => residentialStatusList.first);
 
 // String name;
 // int yearOfEntry;
 // String faculty;
 // String typeOfEntry;
 // String expectedAward;
-final courseNameProvider = StateProvider<String>((_) => '');
+final courseNameProvider = StateProvider<String>((_) => courseList.first);
 final courseYearOfEntryProvider = StateProvider<String>((_) => "0");
-final courseFacultyProvider = StateProvider<String>((_) => '');
-final courseTypeOfEntryProvider = StateProvider<String>((_) => '');
-final courseExpectedAwardProvider = StateProvider<String>((_) => '');
+final courseFacultyProvider =
+    StateProvider<String>((_) => courseFacultyList.first);
+final courseTypeOfEntryProvider =
+    StateProvider<String>((_) => courseTypeOfEntryList.first);
+final courseExpectedAwardProvider =
+    StateProvider<String>((_) => courseExpectedAwardList.first);
 
 //   String schoolName;
 // int from;
@@ -73,7 +77,7 @@ final studentProvider = Provider<Student>(
     return Student(
       name: ref.watch(nameProvider.state).state,
       regNo: ref.watch(regNoProvider.state).state,
-      studentNo: int.parse(ref.watch(studentNoProvider.state).state),
+      studentNo: ref.watch(studentNoProvider.state).state,
       academicYear: ref.watch(academicYearProvider.state).state,
       semester: ref.watch(semesterProvider.state).state,
       sex: ref.watch(sexProvider.state).state,
@@ -91,8 +95,7 @@ final studentProvider = Provider<Student>(
       disabled: ref.watch(disabledProvider.state).state,
       course: Course(
         name: ref.watch(courseNameProvider.state).state,
-        yearOfEntry:
-            int.parse(ref.watch(courseYearOfEntryProvider.state).state),
+        yearOfEntry: ref.watch(courseYearOfEntryProvider.state).state,
         faculty: ref.watch(courseFacultyProvider.state).state,
         typeOfEntry: ref.watch(courseTypeOfEntryProvider.state).state,
         expectedAward: ref.watch(courseExpectedAwardProvider.state).state,
@@ -100,18 +103,18 @@ final studentProvider = Provider<Student>(
       schoolsAttended: [
         SchoolAttended(
           schoolName: ref.watch(universityNameProvider.state).state,
-          from: int.parse(ref.watch(yearJoinedProvider.state).state),
-          to: int.parse(ref.watch(yearLeftProvider.state).state),
+          from: ref.watch(yearJoinedProvider.state).state,
+          to: ref.watch(yearLeftProvider.state).state,
         ),
         SchoolAttended(
           schoolName: ref.watch(alevelSchoolNameProvider.state).state,
-          from: int.parse(ref.watch(alevelYearJoinedProvider.state).state),
-          to: int.parse(ref.watch(alevelYearLeftProvider.state).state),
+          from: ref.watch(alevelYearJoinedProvider.state).state,
+          to: ref.watch(alevelYearLeftProvider.state).state,
         ),
         SchoolAttended(
           schoolName: ref.watch(olevelSchoolNameProvider.state).state,
-          from: int.parse(ref.watch(olevelYearJoinedProvider.state).state),
-          to: int.parse(ref.watch(olevelYearLeftProvider.state).state),
+          from: ref.watch(olevelYearJoinedProvider.state).state,
+          to: ref.watch(olevelYearLeftProvider.state).state,
         )
       ],
       hallOfAttachment: ref.watch(hallOfAttachmentProvider.state).state,

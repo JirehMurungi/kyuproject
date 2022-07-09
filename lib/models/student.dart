@@ -39,12 +39,12 @@ class Student {
 
   String name;
   String regNo;
-  int studentNo;
+  String studentNo;
   String academicYear;
   String semester;
   String sex;
   String maritalStatus;
-  String dateOfBirth;
+  DateTime dateOfBirth;
   String nationality;
   String emailAddress;
   String phoneNumber;
@@ -115,12 +115,12 @@ class Student {
   static Student sampleStudent = Student(
     name: "Cephas Brian",
     regNo: "19/i/7834",
-    studentNo: 2000944,
+    studentNo: "2000944",
     academicYear: "Year 1",
     semester: "Sem 2",
     sex: "Male",
     maritalStatus: "Single",
-    dateOfBirth: "20-12-1990",
+    dateOfBirth: DateTime.now(),
     nationality: "Ugandan",
     emailAddress: "jirehmurungi@gmail.com",
     phoneNumber: "0775533685",
@@ -133,14 +133,14 @@ class Student {
     disabled: "false",
     course: Course(
         name: "Computer Science",
-        yearOfEntry: 2020,
+        yearOfEntry: "2020",
         faculty: "Faculty of Science",
         typeOfEntry: "Alevel",
         expectedAward: "Diploma"),
     schoolsAttended: [
-      SchoolAttended(schoolName: "KYU", from: 2018, to: 2020),
-      SchoolAttended(schoolName: "KYU", from: 2018, to: 2020),
-      SchoolAttended(schoolName: "KYU", from: 2018, to: 2020)
+      SchoolAttended(schoolName: "KYU", from: "2018", to: "2020"),
+      SchoolAttended(schoolName: "KYU", from: "2018", to: "2020"),
+      SchoolAttended(schoolName: "KYU", from: "2018", to: "2020")
     ],
     hallOfAttachment: "Nanziri",
     residentialStatus: "Non-Resident",

@@ -1,34 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'providers.dart';
-
-class FormTextField {
-  // label
-  final String label;
-
-  // hint
-  final String hint;
-
-  // validator
-  final FormFieldValidator<String> validator;
-
-  // formValueProvider
-  final StateProvider formValueProvider;
-
-  // keyboard
-  final TextInputType? keyboardType;
-
-  FormTextField({
-    required this.label,
-    required this.hint,
-    required this.validator,
-    required this.formValueProvider,
-    this.keyboardType = TextInputType.text,
-  });
-}
-
 // a list of FormTextField for the student form from the above
+import 'package:flutter/material.dart';
+
+import 'date_field.dart';
+import 'dropdown_field.dart';
+import 'dropdown_lists.dart';
+import 'form_textfield.dart';
+import '../providers.dart';
+
 List<FormTextField> studentFormFields = [
   FormTextField(
     label: 'Name',
@@ -66,7 +44,9 @@ List<FormTextField> studentFormFields = [
     },
     formValueProvider: studentNoProvider,
   ),
-  FormTextField(
+
+  //! Academic Year
+  DropDownField(
     label: 'Academic Year',
     hint: 'Enter your academic year',
     validator: (value) {
@@ -76,23 +56,25 @@ List<FormTextField> studentFormFields = [
       return null;
     },
     formValueProvider: academicYearProvider,
+    dropDownItems: academicYearList,
   ),
 
-  // ! Semester
-  FormTextField(
+  //! Semester
+  DropDownField(
     label: 'Semester',
-    hint: 'Enter your semester',
+    hint: 'Select your semester',
     validator: (value) {
       if (value == null || value.isEmpty) {
-        return 'Please enter your semester';
+        return 'Please select your semester';
       }
       return null;
     },
     formValueProvider: semesterProvider,
+    dropDownItems: semesterList,
   ),
 
-  // ! Sex
-  FormTextField(
+  //! Sex
+  DropDownField(
     label: 'Sex',
     hint: 'Enter your Sex',
     validator: (value) {
@@ -102,10 +84,10 @@ List<FormTextField> studentFormFields = [
       return null;
     },
     formValueProvider: sexProvider,
+    dropDownItems: sexList,
   ),
   //! maritalStatusProvider
-
-  FormTextField(
+  DropDownField(
     label: 'Marital Status',
     hint: 'Enter your Marital Status',
     validator: (value) {
@@ -115,11 +97,11 @@ List<FormTextField> studentFormFields = [
       return null;
     },
     formValueProvider: maritalStatusProvider,
+    dropDownItems: maritalStatusList,
   ),
 
 //!  dateOfBirthProvider
-
-  FormTextField(
+  DateFormField(
     label: 'Date of Birth',
     hint: 'Enter your Date of Birth',
     validator: (value) {
@@ -175,7 +157,7 @@ List<FormTextField> studentFormFields = [
 
 //!  homeDistrictProvider
 
-  FormTextField(
+  DropDownField(
     label: 'Home District',
     hint: 'Enter your Home District',
     validator: (value) {
@@ -185,6 +167,9 @@ List<FormTextField> studentFormFields = [
       return null;
     },
     formValueProvider: homeDistrictProvider,
+    // dropDownItems: homeDistrictList..sort(),
+    dropDownItems: homeDistrictList..sort((a, b) => a.compareTo(b)),
+    // dropDownItems: homeDistrictList..sort(a, b) => a.name.compareTo(b.name),
   ),
 
 //  religiousAffiliationProvider
@@ -258,7 +243,7 @@ List<FormTextField> studentFormFields = [
   ),
 
 //!  disabledProvider
-  FormTextField(
+  DropDownField(
     label: 'Disabled',
     hint: 'Enter your disability status e.g Yes or No',
     validator: (value) {
@@ -268,11 +253,12 @@ List<FormTextField> studentFormFields = [
       return null;
     },
     formValueProvider: disabledProvider,
+    dropDownItems: disabledList,
   ),
 
 //!  hallOfAttachmentProvider
 
-  FormTextField(
+  DropDownField(
     label: 'Hall Of Attachment',
     hint: 'Enter your Hall Of Attachment',
     validator: (value) {
@@ -282,11 +268,12 @@ List<FormTextField> studentFormFields = [
       return null;
     },
     formValueProvider: hallOfAttachmentProvider,
+    dropDownItems: hallOfAttachmentList,
   ),
 
 //!  residentialStatusProvider
 
-  FormTextField(
+  DropDownField(
     label: 'Residential Status',
     hint: 'Enter your Residential Status',
     validator: (value) {
@@ -296,6 +283,7 @@ List<FormTextField> studentFormFields = [
       return null;
     },
     formValueProvider: residentialStatusProvider,
+    dropDownItems: residentialStatusList,
   ),
 ];
 
@@ -306,7 +294,8 @@ List<FormTextField> studentFormFields = [
 //  courseTypeOfEntryProvider
 //  courseExpectedAwardProvider
 List<FormTextField> courseFormFields = [
-  FormTextField(
+  //!  Course
+  DropDownField(
     label: 'Course Name',
     hint: 'Enter your Course Name',
     validator: (value) {
@@ -316,6 +305,7 @@ List<FormTextField> courseFormFields = [
       return null;
     },
     formValueProvider: courseNameProvider,
+    dropDownItems: courseList,
   ),
   FormTextField(
     label: 'Course Year of Entry',
@@ -329,7 +319,9 @@ List<FormTextField> courseFormFields = [
     },
     formValueProvider: courseYearOfEntryProvider,
   ),
-  FormTextField(
+
+  //! Course Faculty
+  DropDownField(
     label: 'Course Faculty',
     hint: 'Enter your Course Faculty',
     validator: (value) {
@@ -339,8 +331,11 @@ List<FormTextField> courseFormFields = [
       return null;
     },
     formValueProvider: courseFacultyProvider,
+    dropDownItems: courseFacultyList,
   ),
-  FormTextField(
+
+  //! Course Type of Entry
+  DropDownField(
     label: 'Course Type of Entry',
     hint: 'Enter your Course Type of Entry',
     validator: (value) {
@@ -350,8 +345,11 @@ List<FormTextField> courseFormFields = [
       return null;
     },
     formValueProvider: courseTypeOfEntryProvider,
+    dropDownItems: courseTypeOfEntryList,
   ),
-  FormTextField(
+
+  //! Course Expected Award
+  DropDownField(
     label: 'Course Expected Award',
     hint: 'Enter your Course Expected Award',
     validator: (value) {
@@ -361,20 +359,9 @@ List<FormTextField> courseFormFields = [
       return null;
     },
     formValueProvider: courseExpectedAwardProvider,
+    dropDownItems: courseExpectedAwardList,
   ),
 ];
-
-//  universityNameProvider
-//  yearJoinedProvider
-//  yearLeftProvider
-
-//  alevelSchoolNameProvider
-//  alevelYearJoinedProvider
-//  alevelYearLeftProvider
-
-//  olevelSchoolNameProvider
-//  olevelYearJoinedProvider
-//  olevelYearLeftProvider
 
 List<FormTextField> schoolFormFields = [
   FormTextField(
