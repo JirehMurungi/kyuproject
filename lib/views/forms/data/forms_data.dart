@@ -285,7 +285,6 @@ List<FormTextField> studentFormFields = [
   ),
 ];
 
-
 List<FormTextField> courseFormFields = [
   //!  Course
   DropDownField(
