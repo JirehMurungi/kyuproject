@@ -41,12 +41,11 @@ final hallOfAttachmentProvider =
 final residentialStatusProvider =
     StateProvider<String>((_) => residentialStatusList.first);
 
-// String name;
-// int yearOfEntry;
-// String faculty;
-// String typeOfEntry;
-// String expectedAward;
-final courseNameProvider = StateProvider<String>((_) => courseList.first);
+final courseNameProvider = StateProvider<String>((_) {
+  final List<String> alphabetCourses = courseList
+    ..sort((a, b) => a.compareTo(b));
+  return alphabetCourses.first;
+});
 final courseYearOfEntryProvider = StateProvider<String>((_) => "0");
 final courseFacultyProvider =
     StateProvider<String>((_) => courseFacultyList.first);

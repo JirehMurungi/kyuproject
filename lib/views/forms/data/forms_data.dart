@@ -167,9 +167,7 @@ List<FormTextField> studentFormFields = [
       return null;
     },
     formValueProvider: homeDistrictProvider,
-    // dropDownItems: homeDistrictList..sort(),
     dropDownItems: homeDistrictList..sort((a, b) => a.compareTo(b)),
-    // dropDownItems: homeDistrictList..sort(a, b) => a.name.compareTo(b.name),
   ),
 
 //  religiousAffiliationProvider
@@ -287,12 +285,7 @@ List<FormTextField> studentFormFields = [
   ),
 ];
 
-// courseFormFields
-//  courseNameProvider
-//  courseYearOfEntryProvider
-//  courseFacultyProvider
-//  courseTypeOfEntryProvider
-//  courseExpectedAwardProvider
+
 List<FormTextField> courseFormFields = [
   //!  Course
   DropDownField(
@@ -305,7 +298,7 @@ List<FormTextField> courseFormFields = [
       return null;
     },
     formValueProvider: courseNameProvider,
-    dropDownItems: courseList,
+    dropDownItems: courseList..sort((a, b) => a.compareTo(b)),
   ),
   FormTextField(
     label: 'Course Year of Entry',
