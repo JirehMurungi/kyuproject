@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:kyuproject/services/cloud/cloud_note.dart';
 import 'package:kyuproject/utilities/dialogs/delete_dialog.dart';
 
-typedef NoteCallback = void Function(CloudNote note);
+import '../models/student.dart';
+
+typedef NoteCallback = void Function(Student note);
 
 class NotesListView extends StatelessWidget {
-  final Iterable<CloudNote> notes;
+  final Iterable<Student> notes;
   final NoteCallback onDeleteNote;
   final NoteCallback onTap;
 
@@ -24,10 +26,10 @@ class NotesListView extends StatelessWidget {
         final note = notes.elementAt(index);
         return ListTile(
           onTap: () {
-            onTap(note);
+            // onTap(note);
           },
           title: Text(
-            note.text,
+            note.name,
             maxLines: 1,
             softWrap: true,
             overflow: TextOverflow.ellipsis,
