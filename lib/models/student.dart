@@ -1,11 +1,14 @@
 // To parse required this JSON data, do
 //
-//     final student = studentFromMap(jsonString);
+//     final student = studentFromMap(jsonfinal String);
 
 import 'dart:convert';
 
 import 'course.dart';
 import 'school_attended.dart';
+
+// access the firebase user object
+// User user;
 
 Student studentFromMap(String str) => Student.fromMap(json.decode(str));
 
@@ -35,30 +38,32 @@ class Student {
     required this.schoolsAttended,
     required this.hallOfAttachment,
     required this.residentialStatus,
+    this.userId,
   });
 
-  String name;
-  String regNo;
-  String studentNo;
-  String academicYear;
-  String semester;
-  String sex;
-  String maritalStatus;
-  DateTime dateOfBirth;
-  String nationality;
-  String emailAddress;
-  String phoneNumber;
-  String homeDistrict;
-  String religiousAffiliation;
-  String firstParentName;
-  String firstParentContact;
-  String secondParentName;
-  String secondParentContact;
-  String disabled;
-  Course course;
-  List<SchoolAttended> schoolsAttended;
-  String hallOfAttachment;
-  String residentialStatus;
+  final String name;
+  final String regNo;
+  final String studentNo;
+  final String academicYear;
+  final String semester;
+  final String sex;
+  final String maritalStatus;
+  final DateTime dateOfBirth;
+  final String nationality;
+  final String emailAddress;
+  final String phoneNumber;
+  final String homeDistrict;
+  final String religiousAffiliation;
+  final String firstParentName;
+  final String firstParentContact;
+  final String secondParentName;
+  final String secondParentContact;
+  final String disabled;
+  final Course course;
+  final List<SchoolAttended> schoolsAttended;
+  final String hallOfAttachment;
+  final String residentialStatus;
+  final String? userId;
 
   factory Student.fromMap(Map<String, dynamic> json) => Student(
         name: json["name"],
@@ -84,6 +89,7 @@ class Student {
             json["schoolsAttended"].map((x) => SchoolAttended.fromMap(x))),
         hallOfAttachment: json["hallOfAttachment"],
         residentialStatus: json["residentialStatus"],
+        userId: json["userId"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -110,6 +116,7 @@ class Student {
             List<dynamic>.from(schoolsAttended.map((x) => x.toMap())),
         "hallOfAttachment": hallOfAttachment,
         "residentialStatus": residentialStatus,
+        "userId": userId,
       };
 
   static Student sampleStudent = Student(
@@ -144,9 +151,10 @@ class Student {
     ],
     hallOfAttachment: "Nanziri",
     residentialStatus: "Non-Resident",
+    userId: "vbndm",
   );
 
-  //  to string
+  //  to final string
   @override
   String toString() {
     return 'Student{name: $name, regNo: $regNo, studentNo: $studentNo, academicYear: $academicYear, semester: $semester';

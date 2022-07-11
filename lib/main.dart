@@ -21,6 +21,7 @@ void main() {
     ProviderScope(
       child: MaterialApp(
         title: 'A Notebook on the go',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

@@ -1,4 +1,5 @@
 // page index
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../models/course.dart';
@@ -118,6 +119,7 @@ final studentProvider = Provider<Student>(
       ],
       hallOfAttachment: ref.watch(hallOfAttachmentProvider.state).state,
       residentialStatus: ref.watch(residentialStatusProvider.state).state,
+      userId: FirebaseAuth.instance.currentUser?.uid,
     );
   },
 );
