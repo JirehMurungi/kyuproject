@@ -20,7 +20,7 @@ void main() {
   runApp(
     ProviderScope(
       child: MaterialApp(
-        title: 'A Notebook on the go',
+        title: 'A student registration system',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,

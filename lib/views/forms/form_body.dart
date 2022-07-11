@@ -87,8 +87,8 @@ class FormBody extends ConsumerWidget {
                         .map<DropdownMenuItem<String>>((String value) {
                       // chopped Value  this shows the value chopped to the first 20 characters and the rest represented by an ellipsis
                       // but first check if string hs more than 20 characters before we chop it
-                      final choppedValue = value.length > 40
-                          ? '${value.substring(0, 40)}...'
+                      final choppedValue = value.length > 18
+                          ? '${value.substring(0, 18)}...'
                           : value;
                       return DropdownMenuItem<String>(
                         value: value,
