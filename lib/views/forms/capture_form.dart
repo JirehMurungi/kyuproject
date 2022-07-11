@@ -40,7 +40,7 @@ class CaptureForm extends ConsumerWidget {
       body: FormBody(formScreen: currentScreen),
       // bottom nav bar with 2 buttons next and back
       bottomNavigationBar: Container(
-        color:  currentScreen.screenColor,
+        color: currentScreen.screenColor,
         height: kToolbarHeight,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,7 +66,7 @@ class CaptureForm extends ConsumerWidget {
                 label: Text(isLastScreen ? "Submit" : 'Next'),
                 style: TextButton.styleFrom(primary: kyuWhite),
                 onPressed: isLastScreen
-                    ? () {
+                    ? () async {
                         // student
                         final student = ref.watch(studentProvider);
 
@@ -74,7 +74,19 @@ class CaptureForm extends ConsumerWidget {
                         // ignore: avoid_print
                         print(student.toString());
                         // submit the form
-                        _studentCloud.addNewStudent(student: student);
+                        await _studentCloud
+                            .addNewStudent(student: student)
+                            .then((_) {
+                          // show snackbar with success message
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              backgroundColor: kyuGreen,
+                              content: Text('Student added successfully'),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                          return;
+                        });
                       }
                     : () {
                         // go forward to next screen by incrementing the index

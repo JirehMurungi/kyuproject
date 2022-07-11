@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kyuproject/services/cloud/cloud_note.dart';
 import 'package:kyuproject/utilities/dialogs/delete_dialog.dart';
 
 import '../models/student.dart';
@@ -26,13 +25,18 @@ class NotesListView extends StatelessWidget {
         final note = notes.elementAt(index);
         return ListTile(
           onTap: () {
-            // onTap(note);
+            onTap(note);
           },
           title: Text(
-            note.name,
+            "${note.name} - ${note.regNo}",
             maxLines: 1,
             softWrap: true,
             overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
           trailing: IconButton(
             onPressed: () async {

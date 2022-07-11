@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'course.dart';
 import 'school_attended.dart';
 
@@ -23,7 +25,7 @@ class Student {
     required this.semester,
     required this.sex,
     required this.maritalStatus,
-    required this.dateOfBirth,
+  required  this.dateOfBirth,
     required this.nationality,
     required this.emailAddress,
     required this.phoneNumber,
@@ -64,6 +66,35 @@ class Student {
   final String hallOfAttachment;
   final String residentialStatus;
   final String? userId;
+
+  // fromSnapshot method
+  Student.fromSnapshot(DocumentSnapshot json)
+      : this(
+          name: json["name"] as String,
+          regNo: json["regNo"] as String,
+          studentNo: json["studentNo"] as String,
+          academicYear: json["academicYear"] as String,
+          semester: json["semester"] as String,
+          sex: json["sex"] as String,
+          maritalStatus: json["maritalStatus"] as String,
+          dateOfBirth: DateTime.parse(json["dateOfBirth"].toDate().toString()),
+          nationality: json["nationality"] as String,
+          emailAddress: json["emailAddress"] as String,
+          phoneNumber: json["phoneNumber"] as String,
+          homeDistrict: json["homeDistrict"] as String,
+          religiousAffiliation: json["religiousAffiliation"] as String,
+          firstParentName: json["firstParentName"] as String,
+          firstParentContact: json["firstParentContact"] as String,
+          secondParentName: json["secondParentName"] as String,
+          secondParentContact: json["secondParentContact"] as String,
+          disabled: json["disabled"] as String,
+          course: Course.fromMap(json["course"]),
+          schoolsAttended: List<SchoolAttended>.from(
+              json["schoolsAttended"].map((x) => SchoolAttended.fromMap(x))),
+          hallOfAttachment: json["hallOfAttachment"] as String,
+          residentialStatus: json["residentialStatus"] as String,
+          userId: json["userId"] as String,
+        );
 
   factory Student.fromMap(Map<String, dynamic> json) => Student(
         name: json["name"],
